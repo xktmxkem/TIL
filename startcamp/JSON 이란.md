@@ -2,7 +2,7 @@
 
 ### 데이터를 저장하거나 전송할 때 많이 사용되는 경량의 DATA교환 형식(JavaScript Object Notation)
 
-
+![json](picture/json.png)
 
 
 

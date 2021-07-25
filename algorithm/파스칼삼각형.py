@@ -10,9 +10,7 @@ for i in range(n):
             temp_ls.append(1)
             print(temp_ls)
         else:
-            temp_ls.append(temp_ls[i-1] + (temp_ls[i-2]))
-            temp_ls.insert(0, 1)
-            temp_ls.insert(-1, 1)
+            temp_ls.append(1)
     print(temp_ls)
 
 

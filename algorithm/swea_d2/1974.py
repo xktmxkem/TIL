@@ -29,6 +29,7 @@ def sudoqu_check(sudoqu):
     b = []
     c = []
     for i in temp_ls:
+        ### for문 가독성 ###
         a.append(i[0])
         b.append(i[1])
         c.append(i[2])

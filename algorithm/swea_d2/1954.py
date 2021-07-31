@@ -2,7 +2,7 @@
 def snail(num):
 
 
-    #### 중요포인트 swallow 복사
+    #### 중요포인트 swallow 복사 ## 시간많이버림
     #result_ls = [[0] * snail] * snail
 
 
@@ -10,8 +10,6 @@ def snail(num):
     result_ls = []
     for i in range(num):
         result_ls.append([0]*  num)
-
-
     hori_point = 0  # x 좌표
     verti_point = 0 # y 좌표
     flag = True # 순서용 깃발
@@ -41,7 +39,7 @@ def snail(num):
                     number += 1
   
  
-            #  x축 증가(인덱스상 감소)
+            # x축 증가(인덱스상 감소)
                 for hori in range(length, 0, -1):
                     hori_point -= 1
                     result_ls[verti_point][hori_point] = number
@@ -52,7 +50,7 @@ def snail(num):
                 length -= 1
 
 
-            #f lag True일때는 반대로 작동 
+            # flag True일때는 반대로 작동 
             else:
                 for verti in range(length , 0, -1):
                     verti_point -= 1

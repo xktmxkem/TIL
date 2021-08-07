@@ -3,7 +3,7 @@ test_case = int(input())
 for test_case in range(1, test_case + 1):
 
     a = int(input())
-    
+    #첫번째두번째는 똑같기에 따로정의
     temp_ls = []
     for x in range(a):
         #2차원 리스트 첫줄 둘째줄 미리 넣어둠

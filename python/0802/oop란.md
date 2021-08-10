@@ -103,26 +103,149 @@
 > >
 > >```python
 > >class <클래스이름>:
-> >    <statement>
+> >   <statement>
 > >class ClassName:
-> >    statement
+> >   statement
 > >```
 > >
 > >
 > >
-> >### 3.2 `filter(function, iterable)`
+> >### 3.2 `인스턴스(Instance) 생성`
 > >
-> >* iterable에서 function의 반환된 결과가 `True` 인 것들만 구성하여 반환합니다.
+> >* 정의된 클래스(`class`)에 속하는 객체를 해당 클래스의 인스턴스(instance)라고 합니다.
+> >* `Person` 클래스의 인스턴스는 `Person()`을 호출함으로써 생성됩니다.
+> >* `type()` 함수를 통해 생성된 객체의 클래스를 확인할 수 있습니다.
 > >
-> >- `filter object` 를 반환합니다.
+> >**활용법**
 > >
-> >### 3.3 `zip(*iterables)`
+> >```python
+> ># 인스턴스 = 클래스()
+> >person1 = Person()
+> >```
 > >
-> >* 복수의 iterable 객체를 모아(`zip()`)준다.
+> >- `person1`은 사용자가 정의한(user-defined) `Person`이라는 데이터 타입(data type)의 인스턴스입니다.
 > >
-> >- 결과는 튜플의 모음으로 구성된 `zip object` 를 반환한다.
+> >### 3.3 `메서드(Method) 정의`
 > >
+> >* 특정 데이터 타입(또는 클래스)의 객체에 공통적으로 적용 가능한 행위(behavior)들을 의미합니다.
+> >
+> >  ------
+> >
+> >  **활용법**
+> >
+> >  ```python
+> >  class Person:
+> >      # 메서드(method)
+> >      def talk(self):    # 인자로 self를 정의해봅시다.
+> >          print('안녕')
+> >  ```
+> >
+> >### 3.4 `self`
+> >
+> >* 인스턴스 자신(self)
+> >* Python에서 인스턴스 메서드는 **호출 시 첫번째 인자로 인스턴스 자신이 전달**되게 설계되었습니다.
+> >* 보통 매개변수으로 `self`를 첫번째 인자로 정의 (다른 이름도 가능하지만 추천하지는 않습니다.)
+> >
+> >**활용법**
+> >
+> >```python
+> ># 인스턴스 = 클래스()
+> >person1 = Person()
+> >```
+> >
+> >- `person1`은 사용자가 정의한(user-defined) `Person`이라는 데이터 타입(data type)의 인스턴스입니다.
+> >
+> >### 3.4.1 생성자(constructor) 메서드
+> >
+> >인스턴스 객체가 생성될 때 호출되는 함수. 반드시 `__init__` 이라는 이름으로 정의.
+> >
+> >------
+> >
+> >**활용법**
+> >
+> >```python
+> >class MyClass:
+> >    def __init__(self):
+> >        print('생성될 때 자동으로 호출되는 메서드입니다.')
+> >```
+> >
+> >- 생성자를 활용하면 인스턴스가 생성될 때 인스턴스의 속성을 정의할 수 있습니다.
+> >
+> >### 3.4.2 소멸자(destructor) 메서드
+> >
+> >- 인스턴스 객체가 소멸(파괴)되기 직전에 호출되는 함수. 반드시 `__del__` 이라는 이름으로 정의.
+> >
+> >------
+> >
+> >**활용법**
+> >
+> >```python
+> >def __del__(self):
+> >    print('소멸될 때 자동으로 호출되는 메서드입니다.')
+> >```
+> >
+> >
+> >
+> >## 3.5 속성(Attribute) 정의
+> >
+> >특정 데이터 타입(또는 클래스)의 객체들이 가지게 될 상태/데이터를 의미합니다.
+> >
+> >`self.<속성명> = <값>` 혹은 `<인스턴스>.<속성명> = <값>`으로 설정합니다
+> >
+> >------
+> >
+> >**활용법**
+> >
+> >```python
+> >class Person:
+> >    def __init__(self, name):
+> >        self.name = name
+> >
+> >    def talk(self):
+> >        print(f'안녕, 나는 {self.name}')
+> >```
+> >
+> >
+> >
+> >## 3.6 매직(스페셜) 메서드
+> >
+> >- 더블언더스코어(`__`)가 있는 메서드는 특별한 일을 하기 위해 만들어진 메서드이기 때문에 `스페셜 메서드` 혹은 `매직 메서드`라고 불립니다.
+> >
+> >- 매직(스페셜) 메서드 형태:
+> >
+> >   
+> >
+> >  ```
+> >  __someting__
+> >  ```
+> >
+> >  ```python
+> >  '__str__(self)',
+> >  '__len__(self)',
+> >  '__repr__(self)',
+> >  '__lt__(self, other)',
+> >  '__le__(self, other)',
+> >  '__eq__(self, other)',
+> >  '__ne__(self, other)',
+> >  '__gt__(self, other)',
+> >  '__ge__(self, other)',
+> >  ```
+> >
+> >### 3.6.1 `__str__(self)`
+> >
+> >```python
+> >class Person:
+> >    def __str__(self):
+> >        return '객체 출력(print)시 보여줄 내용'
+> >```
+> >
+> >- 특정 객체를 출력(`print()`) 할 때 보여줄 내용을 정의할 수 있습니다.
+> >
+> >
+>
 > >---
 
-https://myjamong.tistory.com/274
+# Reference
+
+https://victorydntmd.tistory.com/117
 

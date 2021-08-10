@@ -12,6 +12,7 @@ def solution(genres, plays):
             genres_dict[key] += plays[idx]
             idx += 1
     genres_dict = dict(reversed(sorted(genres_dict.items(), key=lambda x: x[1])))
+
     #장르 내부값 sort
     idx = 0
     for key in genres:
@@ -23,6 +24,8 @@ def solution(genres, plays):
             idx += 1
     for key in sort_album_dict.keys():
         sort_album_dict[key] = list(reversed(sorted(sort_album_dict[key], key=lambda x : x[1])))
+
+
     #전체 sort된 dict 만들기
     for key in genres_dict.keys():
         genres_dict[key] =sort_album_dict[key]
@@ -34,3 +37,15 @@ def solution(genres, plays):
     return  result_ls
 
 print(solution(["classic", "pop", "classic", "classic", "pop"],[500, 600, 150, 800, 2500]))
+
+
+
+
+
+
+
+
+
+
+#####
+

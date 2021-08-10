@@ -1,16 +1,5 @@
 import base64
 
-# def binary(num):
-#     binary_list = []
-#     while(1):
-#         if num < 2 :
-#             binary_list.append(1)
-#             break
-#         else:
-#             binary_list.append(num%2)
-#             num = int(num/2)
-#     binary_list.reverse()
-#     return(binary_list)
 
 
 test = int(input())

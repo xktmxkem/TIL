@@ -24,6 +24,6 @@ for test in range(1, test + 1):
             if before_bit[i] != final_bit[i]:
                 before_bit[i:] = [final_bit[i]] * (len(before_bit) - i)
                 cnt += 1
-                
+
     ## 실행시간을 더 줄일수 잇는지 조사 
     print('#{} {}'.format(test, cnt))

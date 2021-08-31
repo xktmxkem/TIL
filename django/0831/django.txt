@@ -1,0 +1,166 @@
+gitignore django python visual studio code 
+
+가상환경 만들기
+python -m venv venv
+
+터미널에 쳐서 가상환경 활성화
+source venv/Scripts/activate
+
+pip list
+
+pip install django(장고설치)
+
+(이건 참고사항 폴더만들고 . 이 없으면 폴더만들고 안에 또 파일 생기고 만들어짐 암튼 . 찍어서 쓰셈)
+
+cd django_intro/
+
+django-admin startproject config .
+
+(django-admin startproject 프로젝트 이름
+.찍어서 폴더만듬? 현재폴더 위치)
+
+python manage.py runserver
+
+
+
+__init__.py있는 폴더를 설정폴더?라고 부를거임
+
+settings/urls 파일 설정수정(?)
+
+asgi/wsgi는 배포할때 설정수정
+
+컨트롤 c 누르면 꺼짐 cotrol l 누르면 깨끗
+
+터미널에 python manage.py startapp articles
+
+하고 settings에 INSTALLED APPS 젤 위에 'articles' , 
+추가해줌
+
+
+
+urls.py안에 
+path('경로/', view에서 할 것)
+
+요청과응답
+1. config에 urls.py안에 path('index/', views.index),  위쪽에 추가
+
+그리고 from articles import views
+(사용자로부터 index라는 요청을 받으면 그거 알려줘(?))
+
+그리고 articles에 views 들어가서 index함수로 정의해줌 request라는 요청으로 받음
+def index(request):
+    return render(request, 'index.html')
+request가 미들웨어에서 인자로 넘겨줌
+
+그다음에
+탬플릿정의해줌
+articles 우측클릭 해서 templates폴더 생성
+templates폴더 우측클릭 index.html파일생성
+!+엔터 
+body안에 <h1>Hello world!!</h1>
+
+터미널에 가상환경 켜졌나보고 안켜졌으면(?)
+source ../venv/Scripts/activate
+하고 
+
+python manage.py runserver하고 주소 컨트롤 클릭하면 
+Page not found 뜸(이건 사용자가 등록되지 않은 요청을 했을때 보임)
+
+주소뒤에 index/하면 
+Hello world!! 보임
+<h1>이르으음</h1>
+페이지 새로고침하면 
+이르으음 보임
+
+404 대표적인 http_status_code
+:님이 요청 잘못함
+
+**이거 두개 시험 잘나옴
+컨피그 셋팅즈 안에
+
+LANGUAGE_CODE = 'ko-kr'
+TIME_ZONE = 'Aisa/Seoul'
+
+USE_TZ = True (DB저장 시간)/ 교수님은 UDC_TZ라고 부를거임,뭔가 이거써야 다른 나라에서 접속해도 시간 제대로됨
+
+BASE_DIR는 장고인트로(?)를 의미함 베이스폴더(?)
+
+
+articles에 index안에 ,{'name':'대감집고양이'}
+render에 넘기는 값만 'index.html'에서 사용가능하다
+index.html에 render에 저장한값 부르기 위해서는 중괄호 두개 {{ 저장된 값 }}
+
+****사이트 참고https://docs.djangoproject.com/en/3.2/ref/templates/builtins/
+
+Built-in filter reference
+(장고에 있는 빌트인 필터(?))
+
+
+DTL실습 2
+config의 url에 path('greeting/', views.greeting), ->articles의 views에 def greeting(request):
+    foods = ['apple', 'banana', 'peach']
+    info = {
+        'name':'Elena',
+    }
+    return render(request,'greeting.html',{'foods':foods, 'inf': info})
+
+키 밸류는 굳이 이름이 같을 필요는 없다 그치만 디버깅을 위해서는 같은게 좋다
+
+DTL은 html 주석?을 먹지 않는다 ????
+
+
+--------------------------------------------
+*중복된 부분을 파일로 만들기
+index.html
+greeting.html에 중복된 body윗부분 제거
+
+django_intro 젤 바깥 폴더에 templates폴더 만들고 base.html파일 생성
+!엔터 + bootstrap들어가서 css 타이틀윗줄, js 은 body바로 위 링크 넣기
+
+div.container + 탭
+내부에 block +탭
+
+app안에 소속된 것이 아니라 외부에 있는 템플릿이기 때문에 수동으로 해줘야함 
+
+config > settings
+'DIRS': [BASE_DIR / 'templates'],
+
+최상단에 extends 엔터
+{% extends 'base.html' %}
+이게 templates상속받아오는거임
+
+정리 
+1. base.html을 생성(공용사용이므로 해당 경로에 생성  project/templates)
+2.settings.py
+TEMPLATE => DIRS에 등록
+3.템플릿 상속(코드의 재사용성을 위한 분리)
+
+**HTML Form
+input받는건 name이라는 속성에 받아짐
+
+데이터를 서버로 전송할때 body가 아닌 Query String Parameters를 통해 전송
+(?key=value ..형태)
+
+[실습]T
+
+사용자로부터 입력되는 값은 title이라는 곳에 저장
+
+해당 key값에 밸류를 저장 get
+
+***URL
+Variable Routing : path에 값을 보내는 방법
+주소를 입력할때 그 주소로 보내는 방법
+URL을 요청할때 특정 값을 주면 페이지에 다른 값을 보여준다.
+위치를 하나의 변수값이라고 생각을 함
+
+핵심: 경로패턴을 변수화해보자
+path를 등록을 할때 /<변수명>/
+사용자가 처음부터 정보전달을 할 수 있다
+서로 다른 DB를 불러올 수 있다
+
+Variable Routing을 써야하는 이유 : 사용자가 글을 많이 쓰면 페이지의 경로를 일일이 대응하기에는 무리(매번 url, view를 만들어줘야함)
+
+
+다른 URL패턴과는 차별점을 주는게 좋다.
+path('<username>/<article_number>/',views.read)에서 
+read/<username>으로 바꿔주면 안겹침..

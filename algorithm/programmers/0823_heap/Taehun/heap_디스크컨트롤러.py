@@ -2,8 +2,8 @@ import heapq
 
 def solution(jobs):
     answer = 0
-    heap = []
-    task = []
+    heap = [] # 요청시간이 빠른 순 정렬
+    task = [] # 작업시간이 적은 순 정렬 
     length = len(jobs)
     time = 0
     require_time = 0
@@ -56,4 +56,3 @@ def solution(jobs):
 jobs = [[0, 3], [1, 9], [2, 6]]
 
 solution(jobs)
-

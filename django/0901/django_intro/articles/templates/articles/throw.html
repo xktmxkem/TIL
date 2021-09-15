@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'articles:index' %}">Articles Index로 이동</a>
+
+  <form action="{% url 'articles:catch' %}">
+    <label>제목을 입력하세요 : 
+      <input type="text" name="title">
+    </label>
+
+    <button>전달</button>
+  </form>
+
+{% endblock  %}

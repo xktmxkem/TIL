@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      list: {{ foods }}
+      {% for fo in foods%}
+            {{ fo }}
+      {% endfor %}
+
+      <p> !두번째 : {{ foods.1 }}
+      <br>
+      dictionary : {{ info }}
+      <p> 이름 : {{ info.name }} </p>
+{% endblock %}

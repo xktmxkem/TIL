@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>New</h1>
+<hr>
+<form action="{% url 'articles:update' article.pk %}" method='POST'>
+  {% csrf_token %}
+  <label> Title : 
+    <input type="text" name = 'title' value ="{{article.title}}">
+  </label>
+  <br>
+  <label>Content :
+    <textarea name="content" id="" cols="30" rows="10">텍스트 에어리어는 이곳에 값을 넣어주세요. {{article.content}}</textarea>
+  </label>
+  <br>
+  <button>수정</button>
+</form>
+
+<a href="{% url 'articles:detail' article.pk %}">Back</a>
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>New</h1>
+<hr>
+<form action="{% url 'articles:create'%}" method='POST'>
+  {% csrf_token %}
+  <label> Title : 
+    <input type="text" name = 'title'>
+  </label>
+  <br>
+  <label>Content :
+    <textarea name="content" id="" cols="30" rows="10"></textarea>
+  </label>
+  <br>
+  <button>확인</button>
+</form>
+
+<a href="{% url 'articles:index' %}">Back</a>
+<a href="{% url 'articles:edit' article.pk %}">EDIT</a>
+{% comment %} <a href="{% url 'articles:delete' article.pk%}">DELETE</a> {% endcomment %}
+<form action="{%url 'articles:delete' article.pk %}" method='POST'></form>
+{% csrf_token %}
+<button>삭제</button>
+{% endblock content %}
+
+
+

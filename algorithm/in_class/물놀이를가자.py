@@ -1,45 +1,41 @@
 from collections import deque
-# 상, 하, 좌 , 우
+# 상 하 좌 우
 dy = [-1, 1, 0, 0]
 dx = [0, 0, -1, 1]
 
-def bfs(y, x):
+def bfs():
     global n
     global m
-    cnt = 0
-    cnt_min = []
-    visited = [[0 for i in range(m)] for j in range(n)]
-    visited[y][x] = 1
+    global ans
     queue = deque()
-    queue.append([y,x])
+    for y in range(n):
+        for x in range(m):
+            if board[y][x] == 'W':
+                queue.append([y, x, 0])
+                visited[y][x] = 1
     while queue:
-        cnt += 1
         now = queue.popleft()
+        y, x, cnt = now[0], now[1], now[2]
+        cnt += 1
         for i in range(4):
-            ny = now[0] + dy[i]
-            nx = now[1] + dx[i]
+            ny = dy[i] + y
+            nx = dx[i] + x
             if ny >= n or nx >= m or ny < 0 or nx < 0:
                 continue
-            if visited[ny][nx] == 1:
+            if visited[ny][nx] > 0:
                 continue
-            visited[ny][nx] = 1
-            if board[ny][nx] == 'W':
-                cnt_min.append(cnt)
-                cnt = 0
-                continue
-            queue.append([ny,nx])
-    print(cnt_min)
-    return 0
-
-
+            visited[ny][nx] = cnt
+            ans += cnt
+            queue.append([ny, nx, cnt])
 
 t = int(input())
 for tc in range(1, t + 1):
     n, m = map(int, input().split())
     board = [input() for _ in range(n)]
-    cnt_sum = 0
-    for y in range(n):
-        for x in range(m):
-            if board[y][x] == 'L':
-                cnt_sum += bfs(y, x)
-    print(cnt_sum)
+    visited = [[0 for i in range(m)] for j in range(n)]
+    start = []
+    ans = 0
+
+
+    bfs()
+    print(f'#{tc} {ans}')

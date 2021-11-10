@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Lunch Menu</h1>
+    <button @click="getOne">Pick One</button>
+    <p>{{ pickMenu }}</p>
+    <hr>
+    <h1>Lotto</h1>
+    <button @click="getLotto">Get Lucky Numbers</button>
+    <p v-if="luckyNumbers.length">{{ luckyNumbers }}</p>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      lunch: ['국밥', '짜장면', '피자', '치킨', '떡볶이'],
+      pickMenu : '',
+      luckyNumbers: [],
+    },
+    methods: {
+      getOne: function () {
+        // console.log(this.lunch)
+        // console.log(_.sample(this.lunch))
+        this.pickMenu = _.sample(this.lunch)
+      },
+      getLotto: function () {
+        const numbers = _.range(1, 46)
+        // console.log(_.sampleSize(numbers, 6))
+        this.luckyNumbers = _.sampleSize(numbers, 6)
+      },
+    },
+
+    created: function () {
+      console.log('!!!!!!!!!!!')
+    }
+  })
+
+  </script>
+</body>
+</html>

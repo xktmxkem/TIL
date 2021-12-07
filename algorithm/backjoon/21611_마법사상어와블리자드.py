@@ -118,10 +118,16 @@ def magic3(lst):
                     else:
                         temp_lst.extend(stack)
                         stack = [return_lst[i]]
-                else:
+
+                elif stack[-1] == return_lst[i]:
                     stack.append(return_lst[i])
             else:
                 stack.append(return_lst[i])
+
+            if i == len(return_lst) - 1 and len(stack) >= 4:
+                SCORE[str(stack[-1])] += len(stack)
+                stack = []
+
         if stack:
             temp_lst.extend(stack)
             stack = []
@@ -140,11 +146,14 @@ def magic4(lst):
                 return_lst.extend([cnt, stack[-1]])
                 cnt = 1
                 stack = [lst[i]]
+
             else:
                 cnt += 1
         else:
             stack.append(lst[i])
+
     if stack:
+
         return_lst.extend([cnt, stack[-1]])
 
     if len(return_lst) + 1 < N * N:
@@ -168,9 +177,10 @@ def magic5(lst):
                 length += 1
                 cnt = 0
             for i in range(length):
+
+                now_y -= 1
                 if idx >= len(lst) or 0 > now_x or now_x >= N or 0 > now_y or now_y >= N:
                     break
-                now_y -= 1
                 MAP[now_y][now_x] = lst[idx]
                 idx += 1
             direction = 3
@@ -180,9 +190,9 @@ def magic5(lst):
                 length += 1
                 cnt = 0
             for i in range(length):
+                now_y += 1
                 if idx >= len(lst) or 0 > now_x or now_x >= N or 0 > now_y or now_y >= N:
                     break
-                now_y += 1
                 MAP[now_y][now_x] = lst[idx]
                 idx += 1
             direction = 4
@@ -192,9 +202,10 @@ def magic5(lst):
                 length += 1
                 cnt = 0
             for i in range(length):
+
+                now_x -= 1
                 if idx >= len(lst) or 0 > now_x or now_x >= N or 0 > now_y or now_y >= N:
                     break
-                now_x -= 1
                 MAP[now_y][now_x] = lst[idx]
                 idx += 1
             direction = 2
@@ -204,9 +215,10 @@ def magic5(lst):
                 length += 1
                 cnt = 0
             for i in range(length):
+
+                now_x += 1
                 if idx >= len(lst) or 0 > now_x or now_x >= N or 0 > now_y or now_y >= N:
                     break
-                now_x += 1
                 MAP[now_y][now_x] = lst[idx]
                 idx += 1
             direction = 1
@@ -227,5 +239,8 @@ for i in MAGIC:
     second_lst = magic3(first_lst)
     third_lst = magic4(second_lst)
     magic5(third_lst)
+
+
+
 
 print(SCORE['1'] + 2 * SCORE['2'] + 3 * SCORE['3'])
